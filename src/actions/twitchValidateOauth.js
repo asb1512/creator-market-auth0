@@ -6,7 +6,7 @@ export function twitchValidateOauth() {
     return axios({
       method: 'get',
       url: 'https://id.twitch.tv/oauth2/validate',
-      headers: {'Authorization': `${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}`},
+      headers: {'Authorization': `Bearer ${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}`},
     })
     .then(function (response) {
       console.log("response:", response)
