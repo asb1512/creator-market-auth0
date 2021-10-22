@@ -31,11 +31,7 @@ export function twitchValidateOauth() {
   }
 }
 
-
-
-
-
-
+// ________________________________________________________________
 // const config = {'Access-Control-Allow-Origin': '*'}
 
 export function twitchGetUserToken() {
