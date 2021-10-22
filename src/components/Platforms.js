@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { twitchOauth } from '../actions/twitchOauth';
-import { twitchValidateOauth } from '../actions/twitchValidateOauth';
+import { twitchValidateOauth, twitchGetUserToken } from '../actions/twitchApi';
 
 function Platforms(props) {
   return (
     <div>
       <button
-        onClick={() => props.twitchValidateOauth()}
+        onClick={() => props.twitchGetUserToken()}
       >
         Twitch
       </button>
@@ -17,7 +16,7 @@ function Platforms(props) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    twitchOauth: () => dispatch(twitchOauth()),
+    twitchGetUserToken: () => dispatch(twitchGetUserToken()),
     twitchValidateOauth: () => dispatch(twitchValidateOauth())
   }
 }
