@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch} from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
+import { ToastContainer } from 'react-toastify';
 
 import NavBar from './components/NavBar';
 import Loading from './components/Loading';
@@ -19,7 +20,17 @@ function App() {
 
   return (
     <div className="App">
-      
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
       <Switch>
         <Route exact path="/">
