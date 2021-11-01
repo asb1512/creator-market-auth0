@@ -14,20 +14,23 @@ export function twitchValidateOauth() {
   })
 
   return function (dispatch) {
-    dispatch({type: "OAUTH_TWITCH_LOADING"})
+    dispatch({ type: "OAUTH_TWITCH_LOADING" })
     return axios({
       method: 'get',
       url: 'https://id.twitch.tv/oauth2/validate',
-      headers: {'Authorization': `Bearer ${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}`},
+      headers: {
+        'Authorization': `Bearer ${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}`,
+        'Access-Conrol-Allow-Origin': '*'
+      },
     })
-    .then(function (response) {
-      console.log("response:", response)
+      .then(function (response) {
+        console.log("response:", response)
 
-    })
-    .catch(function (error) {
-      console.log("error:", error)
-      notifyError()
-    })
+      })
+      .catch(function (error) {
+        console.log("error:", error)
+        notifyError()
+      })
   }
 }
 
@@ -40,18 +43,35 @@ export function twitchGetUserToken() {
       method: 'get',
       url: `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_TWITCH_REDIRECT_URI}&response_type=token&scope=analytics:read:extensions`,
       // headers: { 'Authorization': `Bearer ${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}` },
-      headers: {"Access-Control-Allow-Origin": "*"},
-      // proxy: {
-      //   protocol: 'http',
-      //   host: '192.168.1.228',
-      //   port: 9000,
-      // }
+      headers: { "Access-Control-Allow-Origin": "*" },
+      proxy: {
+        protocol: 'http',
+        host: '192.168.1.228',
+        port: 9000,
+      }
     })
       .then(function (response) {
         console.log("response:", response)
       })
       .catch(function (error) {
         console.log("error:", error)
+      })
+  }
+}
+
+export function nodeTwitchTest() {
+  return function (dispatch) {
+    dispatch({ type: "OATH_TWITCH_LOADING"})
+    return axios({
+      method: 'get',
+      url: 'http://localhost:8000/twitch-test',
+      headers: { "Access-Control-Allow-Origin": "*" },
+    })
+      .then(function (response) {
+        console.log("nodeTwitchTest response:", response)
+      })
+      .catch(function (error) {
+        console.log("nodeTwitchTest error:", error)
       })
   }
 }
