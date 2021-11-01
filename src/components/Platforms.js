@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { twitchValidateOauth, twitchGetUserToken } from '../actions/twitchApi';
+import { twitchValidateOauth, twitchGetUserToken, nodeTwitchTest } from '../actions/twitchApi';
 
 function Platforms(props) {
   return (
@@ -17,7 +17,8 @@ function Platforms(props) {
 const mapDispatchToProps = (dispatch) => {
   return {
     twitchGetUserToken: () => dispatch(twitchGetUserToken()),
-    twitchValidateOauth: () => dispatch(twitchValidateOauth())
+    twitchValidateOauth: () => dispatch(twitchValidateOauth()),
+    nodeTwitchTest: () => dispatch(nodeTwitchTest())
   }
 }
 
