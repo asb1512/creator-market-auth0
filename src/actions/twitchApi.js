@@ -20,7 +20,10 @@ export function twitchValidateOauth() {
       url: 'https://id.twitch.tv/oauth2/validate',
       headers: {
         'Authorization': `Bearer ${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}`,
-        'Access-Conrol-Allow-Origin': '*'
+        'Access-Conrol-Allow-Origin': '*',
+        // 'Access-Control-Allow-Credentials': 'true',
+        // 'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+        // 'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
       },
     })
       .then(function (response) {
@@ -41,14 +44,22 @@ export function twitchGetUserToken() {
   return function (dispatch) {
     return axios({
       method: 'get',
+      mode: 'no-cors',
       url: `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_TWITCH_REDIRECT_URI}&response_type=token&scope=analytics:read:extensions`,
       // headers: { 'Authorization': `Bearer ${process.env.REACT_APP_TWITCH_ACCESS_TOKEN}` },
-      headers: { "Access-Control-Allow-Origin": "*" },
-      proxy: {
-        protocol: 'http',
-        host: '192.168.1.228',
-        port: 9000,
-      }
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        // 'Access-Control-Allow-Credentials': 'true',
+        // 'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+        // 'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+      },
+      credentials: 'same-origin',
+      // proxy: {
+      //   protocol: 'http',
+      //   host: '192.168.1.228',
+      //   port: 9000,
+      // }
     })
       .then(function (response) {
         console.log("response:", response)
